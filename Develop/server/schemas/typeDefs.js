@@ -2,14 +2,22 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 
-  # TODO: Create a data type for User. It should reference the properies of _id, username, email, and bookCount. It should also allow a property named savedBooks, which will be an array of the Book data type.
+  type User {
+    _id: String!
+    username: String!
+    email: String!
+    bookCount: String!
+    savedBooks: [Book]
+  }
 
-  # INSERT CODE HERE
-
-
-  # TODO: Create a data type for Book. It should reference properties for bookId, authors, description, image, link, and title. Note that authors is plural, so you'll want make sure it's identified as an array. See BookInput below. Also, the title property should be required.
-
-  ## INSERT CODE HERE
+  type Book {
+    bookId: String!
+    authors: [String]
+    description: String!
+    image: String
+    link: String
+    title: String!
+  }
 
 
   type Auth {

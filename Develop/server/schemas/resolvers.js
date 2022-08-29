@@ -36,23 +36,12 @@ const resolvers = {
 
     saveBook: async (parent, { bookData }, context) => {
       if (context.user) {
-        
-        /*
-          TODO:
-
-          Create an mongoose query using findByIdAndUpdate(). You will be finding the current user and adding a new book to the array associated with that user.
-          
-          The id of the user is obtained via context.user._id (see removeBook below for an example)
-          
-          To add the new book, use the $push method, and add bookData the savedBooks array. The removeBook method below is very similar in coding. Use that as a guide.
-
-          Add an options object at the end to return the updated value of the User being modified.
-
-          Don't forget to then return the same variable you appied to the findByIdAndUpdate query. Again, the removeBook method below shows this.
-        */
-
-        // INSERT CODE HERE
-
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id }, 
+          { $push: { savedBooks: { bookData } } },
+          { new: true }
+        )
+        return updatedUser
       }
 
       throw new AuthenticationError('You need to be logged in!');
