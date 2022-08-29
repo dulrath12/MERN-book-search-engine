@@ -18,8 +18,10 @@ import Auth from '../utils/auth';
 const SearchBooks = () => {
 
   // TODO: using useState, create a variable and setter for searchedBooks. The default value should be an empty array.
+  const { searchedBook, setSearchedBooks} = useState([])
 
   // TODO: using useState, create a variable and setter for searchInput. The default value should be an empty string.
+  const { searchInput, setSearchInput } = useState("")
 
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
@@ -47,6 +49,9 @@ const SearchBooks = () => {
          
          The variable name for the request is shown on line 51.
       */
+      fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchInput}`, {
+        method: 'GET'
+      }) 
 
       if (!response.ok) {
         throw new Error('something went wrong!');
